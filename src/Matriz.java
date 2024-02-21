@@ -10,7 +10,7 @@ public class Matriz {
         System.out.println("Columnas");
         int columnas = scanner.nextInt();
         int[][] matriz = new int[filas][columnas];
-        llenarMatriz(matriz, filas, columnas);
+        llenarMatriz(matriz);
         return matriz;
     }
     public int getFilas(int[][] matriz){
@@ -21,25 +21,35 @@ public class Matriz {
         int columnas=0;
         return columnas=matriz[0].length;
     }
-    public void llenarMatriz(int[][] matriz, int filas, int columnas) {
-        for (int i = 0; i < filas; i++) {
-            for (int j = 0; j < columnas; j++) {
+    public void llenarMatriz(int[][] matriz) {
+        for (int i = 0; i < this.getFilas(matriz); i++) {
+            for (int j = 0; j < this.getColumnas(matriz); j++) {
                 System.out.println("Ingresa el valor a guardar en la posicion [" + (i + 1) + "][" + (j + 1) + "]");
                 matriz[i][j] = scanner.nextInt();
             }
         }
-        System.out.println(imprimirMatriz(matriz, filas, columnas));
+        System.out.println(imprimirMatriz(matriz));
     }
 
-    public StringBuilder imprimirMatriz(int[][] matriz, int filas, int columnas) {
+    public StringBuilder imprimirMatriz(int[][] matriz) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < filas; i++) {
-            for (int j = 0; j < columnas; j++) {
+        for (int i = 0; i < this.getFilas(matriz); i++) {
+            for (int j = 0; j < this.getColumnas(matriz); j++) {
                 stringBuilder.append("\t").append(matriz[i][j]).append(" ");
             }
             stringBuilder.append("\n");
         }
         return stringBuilder;
+    }
+
+    public void suma(int [][] matrizA ,int [][] matrizB ){
+        int[][] resultado= new int[matrizA.length][matrizB.length];
+        for (int i = 0; i < this.getFilas(matrizA); i++) {
+            for (int j = 0; j < this.getColumnas(matrizB); j++) {
+                resultado[i][j] = matrizA[i][j] + matrizB[i][j];
+            }
+        }
+        System.out.print("Resultado de suma: \n"+this.imprimirMatriz(resultado)+"\n -FIN");
     }
 
 }
