@@ -1,9 +1,10 @@
 import java.util.Scanner;
 
 public class Matriz {
-    public int[][] getMatriz() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingresa le tamaño de las matriz");
+    static Scanner scanner = new Scanner(System.in);
+
+    public int[][] crearMatriz() {
+        System.out.println("Ingresa el tamaño de las matriz");
         System.out.println("Filas");
         int filas = scanner.nextInt();
         System.out.println("Columnas");
@@ -12,8 +13,15 @@ public class Matriz {
         llenarMatriz(matriz, filas, columnas);
         return matriz;
     }
+    public int getFilas(int[][] matriz){
+        int filas= matriz.length;
+        return filas;
+    }
+    public int getColumnas(int[][] matriz){
+        int columnas=0;
+        return columnas=matriz[0].length;
+    }
     public void llenarMatriz(int[][] matriz, int filas, int columnas) {
-        Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
                 System.out.println("Ingresa el valor a guardar en la posicion [" + (i + 1) + "][" + (j + 1) + "]");

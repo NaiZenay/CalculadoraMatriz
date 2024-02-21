@@ -15,11 +15,14 @@ public class Menu {
                 int[][] matrizB;
                 do {
                     matrizValida=true;
-                    matrizA=matriz.getMatriz() ;
-                    matrizB=matriz.getMatriz() ;
-                    if (matrizA.length != matrizB.length ){
+                    matrizA=matriz.crearMatriz() ;
+                    matrizB=matriz.crearMatriz() ;
+
+                    if (matriz.getFilas(matrizA) != matriz.getFilas(matrizB) && matriz.getColumnas(matrizA) != matriz.getColumnas(matrizB)){
                         System.out.println("Las matrices no coinciden en tamaño\n" +
-                                "Segun el criterio de suma de matrices estas deben de tener el mismo numero de filas y columnas\n" +
+                                "La matriz A tiene: "+matriz.getFilas(matrizA)+" filas y "+matriz.getColumnas(matrizA)+" columnas\n"+
+                                "La matriz B tiene: "+matriz.getFilas(matrizB)+" filas y "+matriz.getColumnas(matrizB)+" columnas\n"+
+                                "Segun el criterio de suma de matrices estas deben de tener el mismo numero de filas y columnas\n\n" +
                                 "Ingrese los valores de la matriz de nuevo:\n"
                         );
                         matrizValida=false;
@@ -36,6 +39,9 @@ public class Menu {
                 }
                 System.out.print("Resultado de suma: \n"+matriz.imprimirMatriz(resultado,matrizB.length,matrizA.length)+"\n -FIN");
                 break;
+
+
+
             default:
                 System.out.println("Programa finalizado");
                 break;
