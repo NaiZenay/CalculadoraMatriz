@@ -1,50 +1,63 @@
 import java.util.Scanner;
 
 public class Menu {
-    public void menu(){
-        Matriz matriz = new Matriz();
+    public int opcion() {
         Scanner scanner = new Scanner(System.in);
+        int opcionMenu = 0;
         System.out.println("Ingresa el numero de la operacion a realizar \n" +
-                "1)Sumar matrices\n2)Restar matrices");
-        int opcionMenu = scanner.nextInt();
+                "1)Sumar matrices\n2)Restar matrices\nIngresa cualquier letra para terminar el programa");
+        try {
+            opcionMenu = scanner.nextInt();
+        } catch (Exception e) {
+            opcionMenu=99999;
+        }
+        return opcionMenu;
+    }
 
+    public void abrirMenuOperaciones(int opcionMenu) {
+        Matriz matriz = new Matriz();
+        int[][] matrizA;
+        int[][] matrizB;
         switch (opcionMenu) {
+            case 0:
+                this.abrirMenuOperaciones(this.opcion());
             case 1:
-                boolean matrizValida;
-                int[][] matrizA;
-                int[][] matrizB;
-                do {
-                    matrizValida=true;
-                    matrizA=matriz.crearMatriz() ;
-                    matrizB=matriz.crearMatriz() ;
-
-                    if (matriz.getFilas(matrizA) != matriz.getFilas(matrizB) && matriz.getColumnas(matrizA) != matriz.getColumnas(matrizB)){
-                        System.out.println("Las matrices no coinciden en tamaño\n" +
-                                "La matriz A tiene: "+matriz.getFilas(matrizA)+" filas y "+matriz.getColumnas(matrizA)+" columnas\n"+
-                                "La matriz B tiene: "+matriz.getFilas(matrizB)+" filas y "+matriz.getColumnas(matrizB)+" columnas\n"+
-                                "Segun el criterio de suma de matrices estas deben de tener el mismo numero de filas y columnas\n\n" +
-                                "Ingrese los valores de la matriz de nuevo:\n"
-                        );
-                        matrizValida=false;
-                    }
-                }while (!matrizValida);
-
-
-                int[][] resultado= new int[matrizA.length][matrizA.length];
-
-                for (int i = 0; i < matrizA.length; i++) {
-                    for (int j = 0; j < matrizA.length; j++) {
-                        resultado[i][j] = matrizA[i][j] + matrizB[i][j];
-                    }
+                matrizA = matriz.crearMatriz();
+                matrizB = matriz.crearMatriz();
+                if (matriz.validacionSumaResta(matrizA, matrizB)) {
+                    matriz.suma(matrizA, matrizB);
+                } else {
+                    this.tryAgain(1);
                 }
-                System.out.print("Resultado de suma: \n"+matriz.imprimirMatriz(resultado,matrizB.length,matrizA.length)+"\n -FIN");
+                this.abrirMenuOperaciones(this.opcion());
                 break;
-
-
-
+            case 2:
+                matrizA = matriz.crearMatriz();
+                matrizB = matriz.crearMatriz();
+                if (matriz.validacionSumaResta(matrizA, matrizB)) {
+                    matriz.resta(matrizA, matrizB);
+                } else {
+                    this.tryAgain(2);
+                }
+                this.abrirMenuOperaciones(this.opcion());
+                break;
             default:
                 System.out.println("Programa finalizado");
                 break;
+        }
+    }
+
+    //Numero de operacion correspondiente en el menu de operaciones
+    public void tryAgain(int numeroOperacion) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Deseas realizar de nuevo esta operacion?\n" +
+                "Ingresa 1 para intentar de nuevo\n" +
+                "Ingresa 0 para volver al menu");
+        int respuesta = scanner.nextInt();
+        if (respuesta == 1) {
+            this.abrirMenuOperaciones(numeroOperacion);
+        } else {
+            this.abrirMenuOperaciones(0);
         }
     }
 

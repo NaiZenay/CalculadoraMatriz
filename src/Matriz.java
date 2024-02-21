@@ -42,6 +42,20 @@ public class Matriz {
         return stringBuilder;
     }
 
+    public boolean validacionSumaResta(int [][] matrizA , int [][] matrizB ){
+        boolean matrizValida=true;
+            if ((this.getFilas(matrizA) != this.getFilas(matrizB)) || (this.getColumnas(matrizA) != this.getColumnas(matrizB))) {
+                System.out.println("Las matrices no coinciden en tamaño");
+                System.out.println(
+                        "La matriz A tiene: " + this.getFilas(matrizA) + " filas y " + this.getColumnas(matrizA) + " columnas\n" +
+                        "La matriz B tiene: " + this.getFilas(matrizB) + " filas y " + this.getColumnas(matrizB) + " columnas\n" +
+                        "Segun el criterio de suma y resta de matrices estas deben de tener el mismo numero de filas y columnas\n"
+                );
+                matrizValida = false;
+            }
+        return matrizValida;
+    }
+
     public void suma(int [][] matrizA ,int [][] matrizB ){
         int[][] resultado= new int[matrizA.length][matrizB.length];
         for (int i = 0; i < this.getFilas(matrizA); i++) {
@@ -50,6 +64,16 @@ public class Matriz {
             }
         }
         System.out.print("Resultado de suma: \n"+this.imprimirMatriz(resultado)+"\n -FIN");
+    }
+
+    public void resta(int [][] matrizA ,int [][] matrizB ){
+        int[][] resultado= new int[matrizA.length][matrizB.length];
+        for (int i = 0; i < this.getFilas(matrizA); i++) {
+            for (int j = 0; j < this.getColumnas(matrizB); j++) {
+                resultado[i][j] = matrizA[i][j] - matrizB[i][j];
+            }
+        }
+        System.out.print("Resultado de resta: \n"+this.imprimirMatriz(resultado)+"\n -FIN");
     }
 
 }
