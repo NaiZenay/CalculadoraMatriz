@@ -5,7 +5,11 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
         int opcionMenu = 0;
         System.out.println("Ingresa el numero de la operacion a realizar \n" +
-                "1)Sumar matrices\n2)Restar matrices\nIngresa cualquier letra para terminar el programa");
+                "1)Sumar matrices\n" +
+                "2)Restar matrices\n" +
+                "3)Multiplicacion\n" +
+                "4)Multiplicacion Escalar\n"+
+                "Ingresa cualquier letra para terminar el programa");
         try {
             opcionMenu = scanner.nextInt();
         } catch (Exception e) {
@@ -15,6 +19,7 @@ public class Menu {
     }
 
     public void abrirMenuOperaciones(int opcionMenu) {
+        Scanner scanner = new Scanner(System.in);
         Matriz matriz = new Matriz();
         int[][] matrizA;
         int[][] matrizB;
@@ -39,6 +44,24 @@ public class Menu {
                 } else {
                     this.tryAgain(2);
                 }
+                this.abrirMenuOperaciones(this.opcion());
+                break;
+            case 3:
+                matrizA = matriz.crearMatriz();
+                matrizB = matriz.crearMatriz();
+                if (matriz.validacionMultiplicacion(matrizA, matrizB)) {
+                    matriz.multiplicacion(matrizA, matrizB);
+                } else {
+                    this.tryAgain(2);
+                }
+                this.abrirMenuOperaciones(this.opcion());
+                break;
+            case 4:
+
+                matrizA = matriz.crearMatriz();
+                System.out.println("Ingresa el numero escalar");
+                int escalar = scanner.nextInt();
+                matriz.multiplicacionEscalar(matrizA,escalar);
                 this.abrirMenuOperaciones(this.opcion());
                 break;
             default:
