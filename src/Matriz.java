@@ -105,7 +105,16 @@ public class Matriz {
 
     public void multiplicacion(int[][] matrizA, int[][] matrizB) {
         int[][] resultado = new int[this.getFilas(matrizA)][this.getColumnas(matrizB)];
-        //TODO
+
+        for (int i = 0; i < resultado.length; i++) {
+            for (int j = 0; j < this.getColumnas(resultado) ; j++) {
+                int sumaIJ=0;
+                for (int k = 0; k < this.getColumnas(resultado); k++) {
+                    sumaIJ+=matrizA[i][k]*matrizB[k][j];
+                }
+                resultado[i][j]=sumaIJ;
+            }
+        }
         System.out.print("Resultado de multiplicacion: \n"+this.imprimirMatriz(resultado)+"\n -FIN\n");
 
     }
