@@ -109,7 +109,7 @@ public class Matriz {
         for (int i = 0; i < resultado.length; i++) {
             for (int j = 0; j < this.getColumnas(resultado) ; j++) {
                 int sumaIJ=0;
-                for (int k = 0; k < this.getColumnas(resultado); k++) {
+                for (int k = 0; k < this.getFilas(resultado); k++) {
                     sumaIJ+=matrizA[i][k]*matrizB[k][j];
                 }
                 resultado[i][j]=sumaIJ;
