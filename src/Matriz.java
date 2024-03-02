@@ -97,7 +97,7 @@ public class Matriz {
         int[][] resultado = new int[this.getFilas(matriz)][this.getColumnas(matriz)];
         for (int i = 0; i < this.getFilas(matriz); i++) {
             for (int j = 0; j < this.getColumnas(matriz); j++) {
-                resultado[i][j] = escalar*matriz[i][j];
+                resultado[i][j] = escalar * matriz[i][j];
             }
         }
         System.out.print("Resultado de multiplicacion escalar: \n" + this.imprimirMatriz(resultado) + "\n -FIN\n");
@@ -107,15 +107,22 @@ public class Matriz {
         int[][] resultado = new int[this.getFilas(matrizA)][this.getColumnas(matrizB)];
 
         for (int i = 0; i < resultado.length; i++) {
-            for (int j = 0; j < this.getColumnas(resultado) ; j++) {
-                int sumaIJ=0;
+            for (int j = 0; j < this.getColumnas(resultado); j++) {
+                int sumaIJ = 0;
                 for (int k = 0; k < this.getFilas(resultado); k++) {
-                    sumaIJ+=matrizA[i][k]*matrizB[k][j];
+                    sumaIJ += matrizA[i][k] * matrizB[k][j];
                 }
-                resultado[i][j]=sumaIJ;
+                resultado[i][j] = sumaIJ;
             }
         }
-        System.out.print("Resultado de multiplicacion: \n"+this.imprimirMatriz(resultado)+"\n -FIN\n");
+        System.out.print("Resultado de multiplicacion: \n" + this.imprimirMatriz(resultado) + "\n -FIN\n");
+
+    }
+
+    public void determinante(int[][] matriz) {
+        int determinante = 0;
+        //TODO
+        System.out.print("El determinante de la matriz es: " + determinante + "\n" + " -FIN\n");
 
     }
 

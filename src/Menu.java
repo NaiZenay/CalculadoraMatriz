@@ -8,12 +8,13 @@ public class Menu {
                 "1)Sumar matrices\n" +
                 "2)Restar matrices\n" +
                 "3)Multiplicacion\n" +
-                "4)Multiplicacion Escalar\n"+
+                "4)Multiplicacion Escalar\n" +
+                "5)Determinante\n" +
                 "Ingresa cualquier letra para terminar el programa");
         try {
             opcionMenu = scanner.nextInt();
         } catch (Exception e) {
-            opcionMenu=99999;
+            opcionMenu = 99999;
         }
         return opcionMenu;
     }
@@ -57,11 +58,15 @@ public class Menu {
                 this.abrirMenuOperaciones(this.opcion());
                 break;
             case 4:
-
                 matrizA = matriz.crearMatriz();
                 System.out.println("Ingresa el numero escalar");
                 int escalar = scanner.nextInt();
-                matriz.multiplicacionEscalar(matrizA,escalar);
+                matriz.multiplicacionEscalar(matrizA, escalar);
+                this.abrirMenuOperaciones(this.opcion());
+                break;
+            case 5:
+                matrizA = matriz.crearMatriz();
+                matriz.determinante(matrizA);
                 this.abrirMenuOperaciones(this.opcion());
                 break;
             default:
