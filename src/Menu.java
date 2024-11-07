@@ -10,6 +10,8 @@ public class Menu {
                 "3)Multiplicacion\n" +
                 "4)Multiplicacion Escalar\n" +
                 "5)Determinante\n" +
+                "6)Factorizacion LU\n" +
+
                 "Ingresa cualquier letra para terminar el programa");
         try {
             opcionMenu = scanner.nextInt();
@@ -24,6 +26,7 @@ public class Menu {
         Matriz matriz = new Matriz();
         int[][] matrizA;
         int[][] matrizB;
+        double[][] matrizD;
         switch (opcionMenu) {
             case 0:
                 this.abrirMenuOperaciones(this.opcion());
@@ -67,6 +70,11 @@ public class Menu {
             case 5:
                 matrizA = matriz.crearMatriz();
                 matriz.determinante(matrizA);
+                this.abrirMenuOperaciones(this.opcion());
+                break;
+            case 6:
+                matrizD = matriz.crearMatrizD();
+                matriz.factorizacionLU(matrizD);
                 this.abrirMenuOperaciones(this.opcion());
                 break;
             default:

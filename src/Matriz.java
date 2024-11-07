@@ -14,14 +14,32 @@ public class Matriz {
         return matriz;
     }
 
+    public double[][] crearMatrizD() {
+        System.out.println("Ingresa el tamaño de las matriz");
+        System.out.println("Filas");
+        int filas = scanner.nextInt();
+        System.out.println("Columnas");
+        int columnas = scanner.nextInt();
+        double[][] matriz = new double[filas][columnas];
+        llenarMatriz(matriz);
+        return matriz;
+    }
+
     public int getFilas(int[][] matriz) {
         int filas = matriz.length;
         return filas;
     }
 
     public int getColumnas(int[][] matriz) {
-        int columnas = 0;
-        return columnas = matriz[0].length;
+        return matriz[0].length;
+    }
+    public int getFilas(double[][] matriz) {
+        int filas = matriz.length;
+        return filas;
+    }
+
+    public int getColumnas(double[][] matriz) {
+        return matriz[0].length;
     }
 
     public void llenarMatriz(int[][] matriz) {
@@ -33,8 +51,27 @@ public class Matriz {
         }
         System.out.println(imprimirMatriz(matriz));
     }
+    public void llenarMatriz(double[][] matriz) {
+        for (int i = 0; i < this.getFilas(matriz); i++) {
+            for (int j = 0; j < this.getColumnas(matriz); j++) {
+                System.out.println("Ingresa el valor a guardar en la posicion [" + (i + 1) + "][" + (j + 1) + "]");
+                matriz[i][j] = scanner.nextInt();
+            }
+        }
+        System.out.println(imprimirMatriz(matriz));
+    }
 
     public StringBuilder imprimirMatriz(int[][] matriz) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < this.getFilas(matriz); i++) {
+            for (int j = 0; j < this.getColumnas(matriz); j++) {
+                stringBuilder.append("\t").append(matriz[i][j]).append(" ");
+            }
+            stringBuilder.append("\n");
+        }
+        return stringBuilder;
+    }
+    public StringBuilder imprimirMatriz(double[][] matriz) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < this.getFilas(matriz); i++) {
             for (int j = 0; j < this.getColumnas(matriz); j++) {
@@ -118,14 +155,63 @@ public class Matriz {
         System.out.print("Resultado de multiplicacion: \n" + this.imprimirMatriz(resultado) + "\n -FIN\n");
 
     }
+    public void multiplicacion(double[][] matrizA, double[][] matrizB) {
+        double[][] resultado = new double[this.getFilas(matrizA)][this.getColumnas(matrizB)];
 
-    public void determinante(int[][] matriz) {
-        int determinante = 0;
-        //TODO
-        System.out.print("El determinante de la matriz es: " + determinante + "\n" + " -FIN\n");
+        for (int i = 0; i < resultado.length; i++) {
+            for (int j = 0; j < this.getColumnas(resultado); j++) {
+                double sumaIJ = 0;
+                for (int k = 0; k < this.getFilas(resultado); k++) {
+                    sumaIJ += matrizA[i][k] * matrizB[k][j];
+                }
+                resultado[i][j] = sumaIJ;
+            }
+        }
+        System.out.print("Resultado de multiplicacion: \n" + this.imprimirMatriz(resultado) + "\n -FIN\n");
 
     }
 
-}
+    public void factorizacionLU(double[][] matriz) {
+        int n = matriz.length;
+        double[][] L = new double[n][n];
+        double[][] U = new double[n][n];
+
+        for (int i = 0; i < n; i++) {
+            // Calcular U
+            for (int j = i; j < n; j++) {
+                double sumaIJ = 0;
+                for (int k = 0; k < i; k++) {
+                    sumaIJ += L[i][k] * U[k][j];
+                }
+                U[i][j] = matriz[i][j] - sumaIJ;
+            }
+
+            // Calcular L
+            for (int x = i + 1; x < n; x++) {
+                double sumaIJ = 0;
+                for (int k = 0; k < i; k++) {
+                    sumaIJ += L[x][k] * U[k][i];
+                }
+                L[x][i] = (matriz[x][i] - sumaIJ) / U[i][i];
+            }
+
+            // Establecer 1 en la diagonal de L
+            L[i][i] = 1;
+        }
+
+        // Imprimir resultados
+        System.out.print("Matriz L:\n" + imprimirMatriz(L) + "\n");
+        System.out.print("Matriz U:\n" + imprimirMatriz(U) + "\n");
+        multiplicacion(L, U);
+    }
+
+        public void determinante ( int[][] matriz){
+            int determinante = 0;
+            //TODO
+            System.out.print("El determinante de la matriz es: " + determinante + "\n" + " -FIN\n");
+
+        }
+
+    }
 
 
