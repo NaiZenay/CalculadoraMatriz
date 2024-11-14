@@ -55,7 +55,7 @@ public class Matriz {
         for (int i = 0; i < this.getFilas(matriz); i++) {
             for (int j = 0; j < this.getColumnas(matriz); j++) {
                 System.out.println("Ingresa el valor a guardar en la posicion [" + (i + 1) + "][" + (j + 1) + "]");
-                matriz[i][j] = scanner.nextInt();
+                matriz[i][j] = scanner.nextDouble();
             }
         }
         System.out.println(imprimirMatriz(matriz));
@@ -109,6 +109,21 @@ public class Matriz {
         }
         return matrizValida;
     }
+
+    public boolean validacionMultiplicacion(double[][] matrizA, double[][] matrizB) {
+        boolean matrizValida = true;
+        if ((this.getColumnas(matrizA) != this.getFilas(matrizB))) {
+            System.out.println("Las matrices no coinciden en tamaño");
+            System.out.println(
+                    "La matriz A tiene: " + this.getFilas(matrizA) + " filas y " + this.getColumnas(matrizA) + " columnas\n" +
+                            "La matriz B tiene: " + this.getFilas(matrizB) + " filas y " + this.getColumnas(matrizB) + " columnas\n" +
+                            "Segun el criterio de multiplicacion de matrices estas deben de tener el mismo numero de columnas en la primer matriz que de filas en la segunda\n"
+            );
+            matrizValida = false;
+        }
+        return matrizValida;
+    }
+
 
     public void suma(int[][] matrizA, int[][] matrizB) {
         int[][] resultado = new int[matrizA.length][matrizB.length];

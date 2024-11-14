@@ -27,6 +27,7 @@ public class Menu {
         int[][] matrizA;
         int[][] matrizB;
         double[][] matrizD;
+        double[][] matrizE;
         switch (opcionMenu) {
             case 0:
                 this.abrirMenuOperaciones(this.opcion());
@@ -51,10 +52,10 @@ public class Menu {
                 this.abrirMenuOperaciones(this.opcion());
                 break;
             case 3:
-                matrizA = matriz.crearMatriz();
-                matrizB = matriz.crearMatriz();
-                if (matriz.validacionMultiplicacion(matrizA, matrizB)) {
-                    matriz.multiplicacion(matrizA, matrizB);
+                matrizD = matriz.crearMatrizD();
+                matrizE = matriz.crearMatrizD();
+                if (matriz.validacionMultiplicacion(matrizD, matrizE)) {
+                    matriz.multiplicacion(matrizD, matrizE);
                 } else {
                     this.tryAgain(2);
                 }
